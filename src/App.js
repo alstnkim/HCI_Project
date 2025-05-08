@@ -12,11 +12,12 @@ import Home from "./pages/Home";
 import Select from "./pages/Select";
 import Main from "./pages/Main";
 import Summarization from "./pages/Summarization";
+import NoteTaking from "./pages/NoteTaking";
 
 function App() {
   return (
     <div>
-      <Summarization />
+      <NoteTaking />
     </div>
   );
 }
