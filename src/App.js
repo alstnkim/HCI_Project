@@ -13,9 +13,7 @@ import Home from "./pages/Home";
 import Select from "./pages/Select";
 import Main from "./pages/Main";
 import Summarization from "./pages/Summarization";
-<<<<<<< HEAD
 import NoteTaking from "./pages/NoteTaking";
-=======
 import Summarization2 from "./pages/Summarization2";
 import ReadyForRecord from "./pages/ReadyForRecord";
 import Saved from "./pages/Saved";
@@ -23,14 +21,11 @@ import Recording from "./pages/Recording";
 import Creating from "./pages/Creating";
 import SelectComponent from "./pages/SelectComponent";
 import HomeToolBar from "./pages/HomeToolBar";
->>>>>>> 014eb70ac3f4ecf88b4d085c32fcf8cd9cbb8b36
 
 function App() {
   return (
     <div>
-<<<<<<< HEAD
       <NoteTaking />
-=======
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -44,7 +39,6 @@ function App() {
           <Route path="/creating" element={<Creating />}></Route>
         </Routes>
       </BrowserRouter>
->>>>>>> 014eb70ac3f4ecf88b4d085c32fcf8cd9cbb8b36
     </div>
   );
 }
