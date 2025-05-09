@@ -37,7 +37,7 @@ const navOther = [
   { label: "Contact", icon: <ContactSupportOutlinedIcon /> },
 ];
 
-export default function Recording() {
+export default function Saved() {
   const navigate = useNavigate();
 
   return (
@@ -207,30 +207,23 @@ export default function Recording() {
                 요약 정리를 위해서 열심히 듣고 있어요!
               </Typography>
             </Box>
-            <Box
+            <Button
+              variant="contained"
+              color="#ffffff"
               sx={{
-                width: 80,
-                height: 80,
-                borderRadius: "50%",
-                backgroundColor: "#f0f0f0", // 회색 원 배경
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                color: "#ffffff",
+                backgroundColor: "#000000",
+                width: 200,
+                height: 40,
+                borderRadius: "999px",
+                textTransform: "none",
+              }}
+              onClick={() => {
+                navigate("/summarization");
               }}
             >
-              <IconButton
-                onClick={() => navigate("/saved")}
-                sx={{
-                  width: 32,
-                  height: 32,
-                  backgroundColor: "#e57373", // 빨간 정사각형
-                  borderRadius: "4px", // 네모지만 살짝 둥글게
-                  "&:hover": {
-                    backgroundColor: "#ef5350", // 호버 시 색상
-                  },
-                }}
-              />
-            </Box>
+              요약 하러가기
+            </Button>
           </Box>
         </Box>
       </Box>

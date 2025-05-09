@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   AppBar,
@@ -14,6 +14,7 @@ import {
   Button,
   Grid,
   Paper,
+  Modal,
 } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
@@ -24,11 +25,20 @@ import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-// 이미지 에셋 (원하는 경로로 교체하세요)
 import summaryIcon from "../component/note.png";
 import cornellIcon from "../component/select2.png";
 import mindmapIcon from "../component/select3.png";
 import customIcon from "../component/select4.png";
+import Modal1 from "../component/modal1.png";
+import Modal2 from "../component/modal2.png";
+import Modal3 from "../component/modal3.png";
+import { useNavigate } from "react-router-dom";
+
+const modalContent = [
+  { name: "요약 & 핵심 문장", img: Modal3 },
+  { name: "코넬 노트 기본 구성", img: Modal1 },
+  { name: "마인드 맵 기본 구성성", img: Modal2 },
+];
 
 const navMain = [
   { label: "Home", icon: <HomeRoundedIcon /> },
@@ -74,6 +84,11 @@ const templates = [
 ];
 
 export default function Summarization2() {
+  const navigate = useNavigate();
+
+  const [openIdx, setOpenIdx] = useState(null);
+  const handleOpen = (idx) => setOpenIdx(idx);
+  const handleClose = () => setOpenIdx(null);
   return (
     <Box sx={{ display: "flex", height: "100vh", bgcolor: "#f7f9fc" }}>
       {/* Sidebar */}
@@ -241,6 +256,7 @@ export default function Summarization2() {
                       variant="outlined"
                       size="small"
                       sx={{ borderRadius: 2 }}
+                      onClick={() => handleOpen(idx)}
                     >
                       {tpl.btn}
                     </Button>
@@ -251,6 +267,51 @@ export default function Summarization2() {
           </Grid>
         </Box>
       </Box>
+      <Modal
+        open={openIdx !== null}
+        onClose={handleClose}
+        closeAfterTransition
+        slotProps={{ backdrop: { sx: { backgroundColor: "rgba(0,0,0,0.4)" } } }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: { xs: 300, sm: 1000 },
+            maxHeight: "80vh",
+            bgcolor: "white",
+            borderRadius: 3,
+            boxShadow: 24,
+            p: 5,
+            overflowY: "auto",
+          }}
+        >
+          {openIdx !== null && templates[openIdx].detail}
+          <Box sx={{ display: "flex", gap: 20 }}>
+            <Typography variant="h6" fontWeight={600}>
+              {modalContent[openIdx]?.name}
+            </Typography>
+            <Box
+              component="img"
+              src={modalContent[openIdx]?.img}
+              sx={{ width: 500 }}
+            />
+          </Box>
+          <Box mt={4} textAlign="center">
+            <Button
+              variant="contained"
+              onClick={() => {
+                navigate("/creating");
+              }}
+              sx={{ borderRadius: 2 }}
+            >
+              요약 생성하기
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </Box>
   );
 }

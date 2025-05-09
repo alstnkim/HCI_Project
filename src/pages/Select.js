@@ -8,6 +8,7 @@ import select4back from "../component/select4back.png";
 import select3back from "../component/select3back.png";
 import select2back from "../component/select2back.png";
 import noteback from "../component/noteback.png";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -68,19 +69,21 @@ function Select() {
         />
       </Box>
       <Box sx={{ width: 1, display: "flex", justifyContent: "center", mt: 5 }}>
-        <Button
-          variant="contained"
-          color="#ffffff"
-          sx={{
-            color: "#ffffff",
-            backgroundColor: "#000000",
-            width: 150,
-            borderRadius: "999px",
-            textTransform: "none",
-          }}
-        >
-          요약 시작하기
-        </Button>
+        <Link to="/record">
+          <Button
+            variant="contained"
+            color="#ffffff"
+            sx={{
+              color: "#ffffff",
+              backgroundColor: "#000000",
+              width: 150,
+              borderRadius: "999px",
+              textTransform: "none",
+            }}
+          >
+            요약 시작하기
+          </Button>
+        </Link>
       </Box>
     </div>
   );

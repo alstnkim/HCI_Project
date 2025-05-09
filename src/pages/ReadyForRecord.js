@@ -12,6 +12,9 @@ import {
   ListItemText,
   LinearProgress,
   Button,
+  Modal, // ⬅ 추가
+  TextField, // ⬅ 추가
+  Link,
 } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
@@ -23,6 +26,7 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import MicNoneRoundedIcon from "@mui/icons-material/MicNoneRounded";
+import { useNavigate } from "react-router-dom";
 
 const navMain = [
   { label: "Home", icon: <HomeRoundedIcon /> },
@@ -36,53 +40,229 @@ const navOther = [
   { label: "Contact", icon: <ContactSupportOutlinedIcon /> },
 ];
 
-export default function ReqdyForRecord() {
-  return (
-    <Box sx={{ display: "flex", height: "100vh", bgcolor: "#f5f7fb" }}>
-      {/* Sidebar */}
+export default function ReadyForRecord() {
+  const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-      {/* Content Area */}
+  /* --- 파일명 입력 상태 예시 (선택) --- */
+  const [fileName, setFileName] = React.useState("");
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        height: "100vh",
+      }}
+    >
+      {/* Sidebar */}
       <Box
         sx={{
-          flexGrow: 1,
+          width: 220,
+          px: 2,
+          py: 3,
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          bgcolor: "white",
+          flexDirection: "column",
+          background: "linear-gradient(180deg, #8da4db 0%, #ffffff 100%)",
         }}
       >
+        <Typography variant="h6" fontWeight={700} sx={{ mb: 3 }}>
+          YOJEONG
+        </Typography>
+
+        {/* Main Section */}
+        <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
+          Main
+        </Typography>
+        <List sx={{ mb: 2 }}>
+          {navMain.map((item) => (
+            <ListItemButton
+              key={item.label}
+              selected={item.label === "Home"}
+              sx={{
+                borderRadius: 1,
+                mb: 1,
+              }}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          ))}
+        </List>
+
+        {/* Other Section */}
+        <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
+          Other
+        </Typography>
+        <List>
+          {navOther.map((item) => (
+            <ListItemButton key={item.label} sx={{ borderRadius: 1, mb: 1 }}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          ))}
+        </List>
+
+        {/* Spacer */}
+        <Box sx={{ flexGrow: 1 }} />
+
+        {/* Subscription Section */}
+        <Typography variant="caption" color="text.secondary">
+          Subscription
+        </Typography>
+        <LinearProgress
+          variant="determinate"
+          value={63}
+          sx={{ height: 6, borderRadius: 5, my: 1 }}
+        />
+        <Typography variant="caption" sx={{ mb: 1 }}>
+          19 summaries used of 30
+        </Typography>
+        <Button
+          variant="outlined"
+          size="small"
+          sx={{ textTransform: "none", borderRadius: 2 }}
+        >
+          Upgrade
+        </Button>
+      </Box>
+
+      {/* Main Content */}
+      <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+        {/* Top Bar */}
+        <AppBar
+          position="static"
+          sx={{
+            backgroundColor: "transparent",
+            background: "linear-gradient(90deg, #8ea4db 0%, #c5d1e8 100%)",
+
+            py: 1,
+          }}
+        >
+          <Toolbar sx={{ gap: 2 }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "60%",
+                  bgcolor: "white",
+                  borderRadius: 20,
+                  px: 2,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <InputBase
+                  placeholder="Search Field Text"
+                  sx={{ width: "100%" }}
+                />
+              </Box>
+            </Box>
+            <IconButton>
+              <NotificationsNoneOutlinedIcon />
+            </IconButton>
+            <IconButton>
+              <SettingsOutlinedIcon />
+            </IconButton>
+            <IconButton>
+              <AccountCircleOutlinedIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+
+        {/* Content Area */}
         <Box
           sx={{
-            width: 160,
-            height: 160,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, #b4c4e5 0%, #ffffff 70%)",
+            flexGrow: 1,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            boxShadow: "0 0 0 4px rgba(180, 196, 229, 0.4)",
+            position: "relative",
+            bgcolor: "white",
           }}
         >
-          <IconButton size="large">
-            <MicNoneRoundedIcon sx={{ fontSize: 48 }} />
-          </IconButton>
-        </Box>
-        <Typography
-          variant="subtitle1"
-          sx={{
-            position: "absolute",
-            top: "calc(50% + 120px)",
-            transform: "translateY(-50%)",
-          }}
-        >
-          수업에 대한 녹음을 시작하기 위해
-          <Typography component="span" color="primary" fontWeight={600}>
-            {" "}
-            버튼
+          <Box
+            sx={{
+              width: 160,
+              height: 160,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, #b4c4e5 0%, #ffffff 70%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 0 0 4px rgba(180, 196, 229, 0.4)",
+            }}
+          >
+            <IconButton size="large" onClick={handleOpen}>
+              <MicNoneRoundedIcon sx={{ fontSize: 48 }} />
+            </IconButton>
+          </Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              position: "absolute",
+              top: "calc(50% + 120px)",
+              transform: "translateY(-50%)",
+            }}
+          >
+            수업에 대한 녹음을 시작하기 위해
+            <Typography component="span" color="primary" fontWeight={600}>
+              {" "}
+              버튼
+            </Typography>
+            을 눌러주세요
           </Typography>
-          을 눌러주세요
-        </Typography>
+        </Box>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          slotProps={{
+            backdrop: {
+              timeout: 300,
+              sx: { backgroundColor: "rgba(0,0,0,0.4)" }, // 뒷배경 어둡게
+            },
+          }}
+        >
+          {/* 가운데 정렬 Box */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: { xs: 320, sm: 500 },
+              bgcolor: "white",
+              borderRadius: 3,
+              boxShadow: 24,
+              p: 5,
+              display: "flex",
+              flexDirection: "column",
+              gap: 3,
+            }}
+          >
+            {/* 모달 콘텐츠 */}
+            <Typography variant="subtitle1" fontWeight={600}>
+              녹음 후에 저장될 파일명을 입력해주세요!
+            </Typography>
+
+            <TextField
+              placeholder="ex. 수업명_일자_차수"
+              size="small"
+              fullWidth
+              value={fileName}
+              onChange={(e) => setFileName(e.target.value)}
+            />
+            <Button onClick={() => navigate("/recording")}>
+              녹음 생성하기
+            </Button>
+          </Box>
+        </Modal>
       </Box>
     </Box>
   );

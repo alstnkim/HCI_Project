@@ -22,7 +22,7 @@ import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import recording from "../component/recording.png";
+import creating from "../component/creating.png";
 import { useNavigate } from "react-router-dom";
 
 const navMain = [
@@ -37,7 +37,7 @@ const navOther = [
   { label: "Contact", icon: <ContactSupportOutlinedIcon /> },
 ];
 
-export default function Recording() {
+export default function Creating() {
   const navigate = useNavigate();
 
   return (
@@ -187,49 +187,18 @@ export default function Recording() {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                gap: 3,
               }}
             >
               <Box
                 component="img"
-                src={recording}
+                src={creating}
                 sx={{
                   width: 200,
                   height: 200,
                 }}
               />
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  mt: 5,
-                  transform: "translateY(-50%)",
-                }}
-              >
-                요약 정리를 위해서 열심히 듣고 있어요!
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                width: 80,
-                height: 80,
-                borderRadius: "50%",
-                backgroundColor: "#f0f0f0", // 회색 원 배경
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <IconButton
-                onClick={() => navigate("/saved")}
-                sx={{
-                  width: 32,
-                  height: 32,
-                  backgroundColor: "#e57373", // 빨간 정사각형
-                  borderRadius: "4px", // 네모지만 살짝 둥글게
-                  "&:hover": {
-                    backgroundColor: "#ef5350", // 호버 시 색상
-                  },
-                }}
-              />
+              <Typography variant="h4">요약 생성 중</Typography>
             </Box>
           </Box>
         </Box>
