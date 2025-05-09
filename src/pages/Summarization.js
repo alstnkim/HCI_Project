@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
   AppBar,
@@ -26,25 +26,44 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import { useNavigate } from "react-router-dom";
 
+/* ------------------- 네비게이션 데이터 ------------------- */
 const navMain = [
   { label: "Home", icon: <HomeRoundedIcon /> },
   { label: "Transcription", icon: <ArticleOutlinedIcon /> },
   { label: "Summarization", icon: <SummarizeOutlinedIcon /> },
   { label: "Quiz", icon: <QuizOutlinedIcon /> },
 ];
-
 const navOther = [
   { label: "Learn more", icon: <InfoOutlinedIcon /> },
   { label: "Contact", icon: <ContactSupportOutlinedIcon /> },
 ];
 
-const files = new Array(11).fill("week 7 HCI 요약본");
-
 export default function Summarization() {
+  /* ------------------- state ------------------- */
+  const [files, setFiles] = useState(Array(11).fill("week 7 HCI 요약본"));
+
+  /* ------------------- refs ------------------- */
+  const fileInputRef = useRef(null);
+
+  /* ------------------- handlers ------------------- */
+  const handleSelectAudio = (e) => {
+    const chosen = e.target.files && e.target.files[0];
+    if (!chosen) return;
+    setFiles((prev) => [chosen.name, ...prev]);
+    e.target.value = ""; // 같은 파일 재선택 시 이벤트 발생을 위해 초기화
+  };
+
+  const triggerFilePicker = () => {
+    if (fileInputRef.current) fileInputRef.current.click();
+  };
+  const navigate = useNavigate();
+
+  /* ------------------- render ------------------- */
   return (
     <Box sx={{ display: "flex", height: "100vh", bgcolor: "#f7f9fc" }}>
-      {/* Sidebar */}
+      {/* ============ Sidebar ============ */}
       <Box
         sx={{
           width: 220,
@@ -52,14 +71,13 @@ export default function Summarization() {
           py: 3,
           display: "flex",
           flexDirection: "column",
-          background: "linear-gradient(180deg, #8da4db 0%, #ffffff 100%)",
+          background: "linear-gradient(180deg,#8da4db 0%,#ffffff 100%)",
         }}
       >
         <Typography variant="h6" fontWeight={700} sx={{ mb: 3 }}>
           YOJEONG
         </Typography>
-
-        {/* Main Section */}
+        {/* Main */}
         <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
           Main
         </Typography>
@@ -75,8 +93,7 @@ export default function Summarization() {
             </ListItemButton>
           ))}
         </List>
-
-        {/* Other Section */}
+        {/* Other */}
         <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
           Other
         </Typography>
@@ -88,11 +105,8 @@ export default function Summarization() {
             </ListItemButton>
           ))}
         </List>
-
-        {/* Spacer */}
         <Box sx={{ flexGrow: 1 }} />
-
-        {/* Subscription Section */}
+        {/* Subscription */}
         <Typography variant="caption" color="text.secondary">
           Subscription
         </Typography>
@@ -113,20 +127,24 @@ export default function Summarization() {
         </Button>
       </Box>
 
-      {/* Main Content */}
+      {/* ============ Main Content ============ */}
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-        {/* Top Bar */}
+        {/* TopBar */}
         <AppBar
           elevation={0}
           position="static"
           sx={{
-            backgroundImage: "linear-gradient(90deg, #8ea4db 0%, #c5d1e8 100%)",
+            backgroundImage: "linear-gradient(90deg,#8ea4db 0%,#c5d1e8 100%)",
             py: 1,
           }}
         >
           <Toolbar sx={{ gap: 2 }}>
             <Box
-              sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}
+              sx={{
+                flexGrow: 1,
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
             >
               <Box
                 sx={{
@@ -156,15 +174,31 @@ export default function Summarization() {
           </Toolbar>
         </AppBar>
 
-        {/* Summarization Grid */}
+        {/* Grid */}
         <Box sx={{ p: 6, flexGrow: 1 }}>
           <Typography variant="h4" sx={{ mb: 4 }}>
             Summarization
           </Typography>
 
+          {/* 숨겨진 input */}
+          <input
+            type="file"
+            accept="audio/*"
+            ref={fileInputRef}
+            onChange={handleSelectAudio}
+            style={{ display: "none" }}
+          />
+
           <Grid container spacing={4}>
-            {/* 새 파일 추가 카드 */}
-            <Grid item xs={6} sm={4} md={3} lg={2}>
+            {/* 새 파일 추가 */}
+            <Grid
+              item
+              xs={6}
+              sm={4}
+              md={3}
+              lg={2}
+              sx={{ display: "flex", justifyContent: "flex-start" }}
+            >
               <Paper
                 elevation={0}
                 sx={{
@@ -180,15 +214,24 @@ export default function Summarization() {
                   transition: "all .2s",
                   "&:hover": { borderColor: "#7991d6" },
                 }}
+                onClick={triggerFilePicker}
               >
                 <AddBoxOutlinedIcon sx={{ fontSize: 40, mb: 1 }} />
                 <Typography variant="body2">새 파일 추가</Typography>
               </Paper>
             </Grid>
 
-            {/* 기존 요약 파일 카드 */}
+            {/* 파일 카드 */}
             {files.map((name, idx) => (
-              <Grid key={idx} item xs={6} sm={4} md={3} lg={2}>
+              <Grid
+                key={idx}
+                item
+                xs={6}
+                sm={4}
+                md={3}
+                lg={2}
+                sx={{ display: "flex", justifyContent: "flex-start" }}
+              >
                 <Paper
                   elevation={0}
                   sx={{
@@ -203,6 +246,9 @@ export default function Summarization() {
                     cursor: "pointer",
                     transition: "box-shadow .2s",
                     "&:hover": { boxShadow: 2 },
+                  }}
+                  onClick={() => {
+                    navigate("/summarization2");
                   }}
                 >
                   <InsertDriveFileOutlinedIcon sx={{ fontSize: 40, mb: 1 }} />

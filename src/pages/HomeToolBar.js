@@ -9,6 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import { flushSync } from "react-dom";
+import { Link } from "react-router-dom";
 
 function HomeToolBar() {
   return (
@@ -85,25 +86,29 @@ function HomeToolBar() {
                 borderColor: "#000000",
                 border: 2,
                 width: 150,
+                height: 60,
                 borderRadius: "999px",
                 textTransform: "none",
               }}
             >
               Sign in
             </Button>
-            <Button
-              variant="contained"
-              color="#ffffff"
-              sx={{
-                color: "#ffffff",
-                backgroundColor: "#000000",
-                width: 150,
-                borderRadius: "999px",
-                textTransform: "none",
-              }}
-            >
-              Get Start
-            </Button>
+            <Link to="/select">
+              <Button
+                variant="contained"
+                color="#ffffff"
+                sx={{
+                  color: "#ffffff",
+                  backgroundColor: "#000000",
+                  width: 150,
+                  height: 60,
+                  borderRadius: "999px",
+                  textTransform: "none",
+                }}
+              >
+                Get Start
+              </Button>
+            </Link>
           </Box>
         </Box>
       </Toolbar>
