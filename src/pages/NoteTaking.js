@@ -178,7 +178,7 @@ export default function NoteTaking() {
                 <Paper elevation={0} sx={{ mx: 3, px: 4, py: 3, flexGrow: 1, borderRadius: 3 }}>
                     {/* 아이콘을 오른쪽 상단으로 정렬 */}
                     <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
-                        <IconButton><EditOutlinedIcon /></IconButton>
+
                         <IconButton><ContentCopyOutlinedIcon /></IconButton>
                     </Box>
 
