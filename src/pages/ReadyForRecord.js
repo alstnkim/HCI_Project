@@ -26,7 +26,7 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import MicNoneRoundedIcon from "@mui/icons-material/MicNoneRounded";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navMain = [
   { label: "Home", icon: <HomeRoundedIcon /> },
@@ -42,6 +42,8 @@ const navOther = [
 
 export default function ReadyForRecord() {
   const navigate = useNavigate();
+  const currentLocation = useLocation();
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -78,7 +80,8 @@ export default function ReadyForRecord() {
           {navMain.map((item) => (
             <ListItemButton
               key={item.label}
-              selected={item.label === "Home"}
+              onClick={() => item.to && navigate(item.to)}
+              selected={item.to === currentLocation.pathname}
               sx={{
                 borderRadius: 1,
                 mb: 1,
@@ -193,8 +196,11 @@ export default function ReadyForRecord() {
               borderRadius: "50%",
               background: "radial-gradient(circle, #b4c4e5 0%, #ffffff 70%)",
               display: "flex",
+              flexDirection: "column",
+
               alignItems: "center",
               justifyContent: "center",
+
               boxShadow: "0 0 0 4px rgba(180, 196, 229, 0.4)",
             }}
           >
@@ -217,6 +223,15 @@ export default function ReadyForRecord() {
             </Typography>
             을 눌러주세요
           </Typography>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/notetaking")}
+            sx={{ mt: 2 }}
+          >
+            NoteTaking
+          </Button>
         </Box>
         <Modal
           open={open}

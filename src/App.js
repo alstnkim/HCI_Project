@@ -22,10 +22,10 @@ import Creating from "./pages/Creating";
 import SelectComponent from "./pages/SelectComponent";
 import HomeToolBar from "./pages/HomeToolBar";
 
+
 function App() {
   return (
     <div>
-      <NoteTaking />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -37,6 +37,7 @@ function App() {
           <Route path="/summarization" element={<Summarization />}></Route>
           <Route path="/summarization2" element={<Summarization2 />}></Route>
           <Route path="/creating" element={<Creating />}></Route>
+          <Route path="/notetaking" element={<NoteTaking />} />
         </Routes>
       </BrowserRouter>
     </div>
