@@ -1,11 +1,20 @@
 import React, { useRef, useState } from "react";
 import {
-  Box, AppBar, Toolbar, IconButton, InputBase, Typography,
-  List, ListItemButton, ListItemIcon, ListItemText,
-  LinearProgress, Button, Grid, Paper
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  InputBase,
+  Typography,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  LinearProgress,
+  Button,
+  Grid,
+  Paper,
 } from "@mui/material";
-import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
@@ -15,49 +24,58 @@ import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import { useNavigate } from "react-router-dom";
+import MainToolBar from "./MainToolBar";
+import MainSearchBar from "./MainSearchBar";
 
-// --- 서비스 임포트
-import { uploadAudioFile } from "../services/audioService";
-
-const navMain = [ /* … */ ];
-const navOther = [ /* … */ ];
+/* ------------------- 네비게이션 데이터 ------------------- */
+const navMain = [
+  { label: "Home", icon: <HomeRoundedIcon /> },
+  { label: "Transcription", icon: <ArticleOutlinedIcon /> },
+  { label: "Summarization", icon: <SummarizeOutlinedIcon /> },
+  { label: "Quiz", icon: <QuizOutlinedIcon /> },
+];
+const navOther = [
+  { label: "Learn more", icon: <InfoOutlinedIcon /> },
+  { label: "Contact", icon: <ContactSupportOutlinedIcon /> },
+];
 
 export default function Summarization() {
-  const navigate = useNavigate();
+  /* ------------------- state ------------------- */
+  const [files, setFiles] = useState(Array(11).fill("week 7 HCI 요약본"));
+
+  /* ------------------- refs ------------------- */
   const fileInputRef = useRef(null);
 
-  // 이제 files는 [{ id, name, text }]
-  const [files, setFiles] = useState([]);
-
-  // 1) 오디오 선택 → 업로드 → DAGLO + 저장 API 호출
-  const handleSelectAudio = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    try {
-      // uploadAudioFile → { id, text }
-      const { id, text } = await uploadAudioFile(file);
-      setFiles(prev => [{ id, name: file.name, text }, ...prev]);
-    } catch (err) {
-      console.error(err);
-      alert("음성 변환 중 오류가 발생했습니다.");
-    } finally {
-      e.target.value = "";
-    }
+  /* ------------------- handlers ------------------- */
+  const handleSelectAudio = (e) => {
+    const chosen = e.target.files && e.target.files[0];
+    if (!chosen) return;
+    setFiles((prev) => [chosen.name, ...prev]);
+    e.target.value = ""; // 같은 파일 재선택 시 이벤트 발생을 위해 초기화
   };
 
-  const triggerFilePicker = () => fileInputRef.current?.click();
+  const triggerFilePicker = () => {
+    if (fileInputRef.current) fileInputRef.current.click();
+  };
+  const navigate = useNavigate();
 
+  /* ------------------- render ------------------- */
   return (
     <Box sx={{ display: "flex", height: "100vh", bgcolor: "#f7f9fc" }}>
-      {/* ── 사이드바 생략 ── */}
-
+      <MainToolBar add="Summarization" />
+      {/* ============ Main Content ============ */}
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
-        {/* ── AppBar 생략 ── */}
-
+        <MainSearchBar />
+        {/* Grid */}
         <Box sx={{ p: 6, flexGrow: 1 }}>
-          <Typography variant="h4" sx={{ mb: 4 }}>Summarization</Typography>
+          <Typography variant="h4" sx={{ mb: 4 }}>
+            Summarization
+          </Typography>
 
+          {/* 숨겨진 input */}
           <input
             type="file"
             accept="audio/*"
@@ -68,15 +86,28 @@ export default function Summarization() {
 
           <Grid container spacing={4}>
             {/* 새 파일 추가 */}
-            <Grid item xs={6} sm={4} md={3} lg={2}>
+            <Grid
+              item
+              xs={6}
+              sm={4}
+              md={3}
+              lg={2}
+              sx={{ display: "flex", justifyContent: "flex-start" }}
+            >
               <Paper
                 elevation={0}
                 sx={{
-                  border: "2px dashed #b0b7c6", borderRadius: 2,
-                  height: 140, width: 140,
-                  display: "flex", flexDirection: "column",
-                  alignItems: "center", justifyContent: "center",
-                  cursor: "pointer", "&:hover": { borderColor: "#7991d6" }
+                  border: "2px dashed #b0b7c6",
+                  borderRadius: 2,
+                  height: 140,
+                  width: 140,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  transition: "all .2s",
+                  "&:hover": { borderColor: "#7991d6" },
                 }}
                 onClick={triggerFilePicker}
               >
@@ -85,24 +116,41 @@ export default function Summarization() {
               </Paper>
             </Grid>
 
-            {/* 변환된 파일 리스트 */}
-            {files.map(({ id, name }, idx) => (
-              <Grid key={idx} item xs={6} sm={4} md={3} lg={2}>
+            {/* 파일 카드 */}
+            {files.map((name, idx) => (
+              <Grid
+                key={idx}
+                item
+                xs={6}
+                sm={4}
+                md={3}
+                lg={2}
+                sx={{ display: "flex", justifyContent: "flex-start" }}
+              >
                 <Paper
                   elevation={0}
                   sx={{
-                    border: "1px solid #d0d5e1", borderRadius: 2,
-                    height: 140, width: 140,
-                    display: "flex", flexDirection: "column",
-                    alignItems: "center", justifyContent: "center",
-                    cursor: "pointer", "&:hover": { boxShadow: 2 }
+                    border: "1px solid #d0d5e1",
+                    borderRadius: 2,
+                    height: 140,
+                    width: 140,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    transition: "box-shadow .2s",
+                    "&:hover": { boxShadow: 2 },
                   }}
-                  onClick={() =>
-                    navigate("/summarization2", { state: { id, name } })
-                  }
+                  onClick={() => {
+                    navigate("/summarization2");
+                  }}
                 >
                   <InsertDriveFileOutlinedIcon sx={{ fontSize: 40, mb: 1 }} />
-                  <Typography variant="body2" sx={{ textAlign: "center" }}>
+                  <Typography
+                    variant="body2"
+                    sx={{ textAlign: "center", mx: 1 }}
+                  >
                     {name}
                   </Typography>
                 </Paper>
