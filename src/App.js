@@ -24,7 +24,8 @@ import HomeToolBar from "./pages/HomeToolBar";
 import CauseEffectPromptPage from "./pages/CauseEffectPromptPage";
 import CauseEffectSummaryPage from "./pages/CauseEffectSummaryPage";
 import CoreSummarization from "./pages/CoreSummarization";
-
+import Cornell from "./pages/Cornell";
+import Transcription from "./pages/Transcription";
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
           <Route path="/prompt" element={<CauseEffectPromptPage />} />
           <Route path="/result" element={<CauseEffectSummaryPage />} />
           <Route path="/coresummarization" element={<CoreSummarization />} />
+          <Route path="/cornell" element={<Cornell />} />
+          <Route path="/transcription" element={<Transcription />} />
 
           <Route path="/notetaking" element={<NoteTaking />} />
         </Routes>
