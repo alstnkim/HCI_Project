@@ -21,6 +21,9 @@ import Recording from "./pages/Recording";
 import Creating from "./pages/Creating";
 import SelectComponent from "./pages/SelectComponent";
 import HomeToolBar from "./pages/HomeToolBar";
+import CauseEffectPromptPage from "./pages/CauseEffectPromptPage";
+import CauseEffectSummaryPage from "./pages/CauseEffectSummaryPage";
+import CoreSummarization from "./pages/CoreSummarization";
 
 
 function App() {
@@ -37,6 +40,10 @@ function App() {
           <Route path="/summarization" element={<Summarization />}></Route>
           <Route path="/summarization2" element={<Summarization2 />}></Route>
           <Route path="/creating" element={<Creating />}></Route>
+          <Route path="/prompt" element={<CauseEffectPromptPage />} />
+          <Route path="/result" element={<CauseEffectSummaryPage />} />
+          <Route path="/coresummarization" element={<CoreSummarization />} />
+
           <Route path="/notetaking" element={<NoteTaking />} />
         </Routes>
       </BrowserRouter>
