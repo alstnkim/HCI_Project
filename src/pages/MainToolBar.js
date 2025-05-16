@@ -36,7 +36,7 @@ const navMain = [
     icon: <SummarizeOutlinedIcon />,
     address: "/summarization",
   },
-  { label: "Quiz", icon: <QuizOutlinedIcon />, address: "/quiz" },
+  { label: "Quiz", icon: <QuizOutlinedIcon /> },
 ];
 
 const navOther = [

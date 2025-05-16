@@ -25,6 +25,7 @@ import CauseEffectPromptPage from "./pages/CauseEffectPromptPage";
 import CauseEffectSummaryPage from "./pages/CauseEffectSummaryPage";
 import CoreSummarization from "./pages/CoreSummarization";
 import Cornell from "./pages/Cornell";
+import MindMapFlow from "./pages/MindmapFlow";
 import Transcription from "./pages/Transcription";
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path="/result" element={<CauseEffectSummaryPage />} />
           <Route path="/coresummarization" element={<CoreSummarization />} />
           <Route path="/cornell" element={<Cornell />} />
+          <Route path="/mindmap" element={<MindMapFlow />} />
           <Route path="/transcription" element={<Transcription />} />
 
           <Route path="/notetaking" element={<NoteTaking />} />
