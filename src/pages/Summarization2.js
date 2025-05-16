@@ -61,6 +61,7 @@ const templates = [
     img: summaryIcon,
     btn: "요약하러 가기 >",
     color: "#d7e9ff",
+    keyword: "/creating?keyword=coresummarization",
   },
   {
     title: "코넬 노트",
@@ -68,6 +69,7 @@ const templates = [
     img: cornellIcon,
     btn: "요약하러 가기 >",
     color: "#f1e4ff",
+    keyword: "/creating?keyword=cornell",
   },
   {
     title: "마인드 맵",
@@ -75,6 +77,7 @@ const templates = [
     img: mindmapIcon,
     btn: "요약하러 가기 >",
     color: "#ffe9e4",
+    keyword: "/creating?keyword=mindmap",
   },
   {
     title: "나만의 요약 스타일 생성",
@@ -82,6 +85,7 @@ const templates = [
     img: customIcon,
     btn: "요약하러 가기 >",
     color: "#e9ffed",
+    keyword: "/prompt",
   },
 ];
 
@@ -202,7 +206,7 @@ export default function Summarization2() {
             <Button
               variant="contained"
               onClick={() => {
-                navigate("/creating");
+                navigate(templates[openIdx].keyword);
               }}
               sx={{ borderRadius: 2 }}
             >

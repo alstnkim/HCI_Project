@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   AppBar,
@@ -24,6 +24,8 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import creating from "../component/creating.png";
 import { useNavigate } from "react-router-dom";
+import MainToolBar from "./MainToolBar";
+import { useLocation } from "react-router-dom";
 
 const navMain = [
   { label: "Home", icon: <HomeRoundedIcon /> },
@@ -37,9 +39,22 @@ const navOther = [
   { label: "Contact", icon: <ContactSupportOutlinedIcon /> },
 ];
 
+const summary = [];
+
 export default function Creating() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const keyword = queryParams.get("keyword");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/" + keyword);
+      // 원하는 함수 호출 또는 상태 업데이트
+    }, 3000);
 
+    // 컴포넌트 언마운트 시 타이머 제거 (메모리 누수 방지)
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <Box
       sx={{
@@ -48,76 +63,7 @@ export default function Creating() {
       }}
     >
       {/* Sidebar */}
-      <Box
-        sx={{
-          width: 220,
-          px: 2,
-          py: 3,
-          display: "flex",
-          flexDirection: "column",
-          background: "linear-gradient(180deg, #8da4db 0%, #ffffff 100%)",
-        }}
-      >
-        <Typography variant="h6" fontWeight={700} sx={{ mb: 3 }}>
-          YOJEONG
-        </Typography>
-
-        {/* Main Section */}
-        <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-          Main
-        </Typography>
-        <List sx={{ mb: 2 }}>
-          {navMain.map((item) => (
-            <ListItemButton
-              key={item.label}
-              selected={item.label === "Home"}
-              sx={{
-                borderRadius: 1,
-                mb: 1,
-              }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItemButton>
-          ))}
-        </List>
-
-        {/* Other Section */}
-        <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-          Other
-        </Typography>
-        <List>
-          {navOther.map((item) => (
-            <ListItemButton key={item.label} sx={{ borderRadius: 1, mb: 1 }}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItemButton>
-          ))}
-        </List>
-
-        {/* Spacer */}
-        <Box sx={{ flexGrow: 1 }} />
-
-        {/* Subscription Section */}
-        <Typography variant="caption" color="text.secondary">
-          Subscription
-        </Typography>
-        <LinearProgress
-          variant="determinate"
-          value={63}
-          sx={{ height: 6, borderRadius: 5, my: 1 }}
-        />
-        <Typography variant="caption" sx={{ mb: 1 }}>
-          19 summaries used of 30
-        </Typography>
-        <Button
-          variant="outlined"
-          size="small"
-          sx={{ textTransform: "none", borderRadius: 2 }}
-        >
-          Upgrade
-        </Button>
-      </Box>
+      <MainToolBar add="Summarization" />
 
       {/* Main Content */}
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
