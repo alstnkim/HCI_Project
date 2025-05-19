@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-  InputBase,
-  Typography,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  LinearProgress,
-  Button,
-} from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
