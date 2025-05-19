@@ -27,6 +27,8 @@ import CoreSummarization from "./pages/CoreSummarization";
 import Cornell from "./pages/Cornell";
 import MindMapFlow from "./pages/MindmapFlow";
 import Transcription from "./pages/Transcription";
+import Quiz from "./pages/Quiz";
+import QuizResult from "./pages/QuizResult";
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
           <Route path="/cornell" element={<Cornell />} />
           <Route path="/mindmap" element={<MindMapFlow />} />
           <Route path="/transcription" element={<Transcription />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quizresult" element={<QuizResult />} />
 
           <Route path="/notetaking" element={<NoteTaking />} />
         </Routes>
