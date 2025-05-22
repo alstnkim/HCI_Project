@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Box } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -11,6 +11,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import MainToolBar from "./MainToolBar";
 import MainSearchBar from "./MainSearchBar";
+import { useNavigate } from "react-router-dom";
 
 const initialNodes = [
   {
@@ -61,6 +62,7 @@ export default function MindMapFlow() {
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ display: "flex", height: "100vh", bgcolor: "#f5f7fb" }}>
@@ -68,21 +70,27 @@ export default function MindMapFlow() {
 
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
         <MainSearchBar />
-
-        <div style={{ height: "80vh", width: "100%" }}>
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            fitView
-          >
-            <MiniMap />
-            <Controls />
-            <Background color="#aaa" gap={16} />
-          </ReactFlow>
+        <div style={{ height: "70vh", width: "100%" }}>
+          <div style={{ height: "70vh", width: "100%" }}>
+            <ReactFlow
+              nodes={nodes}
+              edges={edges}
+              onNodesChange={onNodesChange}
+              onEdgesChange={onEdgesChange}
+              onConnect={onConnect}
+              fitView
+            >
+              <MiniMap />
+              <Controls />
+              <Background color="#aaa" gap={16} />
+            </ReactFlow>
+          </div>
         </div>
+        <Box
+          sx={{ width: 1, display: "flex", justifyContent: "center", mt: 3 }}
+        >
+          <Button onClick={() => navigate("/quizgen")}>퀴즈 생성하기</Button>
+        </Box>
       </Box>
     </Box>
   );

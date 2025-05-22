@@ -99,7 +99,7 @@ export default function CoreSummarization() {
           <Box
             sx={{ width: 1, display: "flex", justifyContent: "center", mt: 3 }}
           >
-            <Button onClick={() => navigate("/quiz")}>퀴즈 생성하기</Button>
+            <Button onClick={() => navigate("/quizgen")}>퀴즈 생성하기</Button>
           </Box>
         </Box>
       </Box>
