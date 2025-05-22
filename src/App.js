@@ -29,6 +29,7 @@ import MindMapFlow from "./pages/MindmapFlow";
 import Transcription from "./pages/Transcription";
 import Quiz from "./pages/Quiz";
 import QuizResult from "./pages/QuizResult";
+import QuizGenerating from "./pages/QuizGenerating";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="/mindmap" element={<MindMapFlow />} />
           <Route path="/transcription" element={<Transcription />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quizgen" element={<QuizGenerating />} />
           <Route path="/quizresult" element={<QuizResult />} />
 
           <Route path="/notetaking" element={<NoteTaking />} />
