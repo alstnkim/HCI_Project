@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
@@ -9,6 +9,7 @@ import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlin
 import { useNavigate } from "react-router-dom";
 import MainToolBar from "./MainToolBar";
 import MainSearchBar from "./MainSearchBar";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined"; // 아이콘 추가
 
 const navMain = [
   { label: "Home", icon: <HomeRoundedIcon /> },
@@ -34,6 +35,11 @@ export default function Transcription() {
     "week 9 HCI 수업 녹음본",
   ];
 
+  // 클릭 시 동작 예시 (필요 시 수정)
+  const handleFileClick = () => {
+    navigate("/notetaking");
+  };
+
   return (
     <Box sx={{ display: "flex", height: "100vh", bgcolor: "#f7f9fc" }}>
       <MainToolBar add="Transcription" />
@@ -56,26 +62,26 @@ export default function Transcription() {
           }}
         >
           {fileList.map((file, index) => (
-            <Box
+            <Button
               key={index}
+              variant="outlined"
+              onClick={handleFileClick}
               sx={{
+                width: 100,
+                height: 140,
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: "center",
                 alignItems: "center",
+                borderRadius: 2,
+                textTransform: "none",
               }}
             >
-              <Box
-                sx={{
-                  width: 80,
-                  height: 100,
-                  border: "2px solid black",
-                  borderRadius: 2,
-                }}
-              />
-              <Typography variant="body2" sx={{ mt: 1 }}>
+              <DescriptionOutlinedIcon sx={{ fontSize: 50, mb: 1 }} />
+              <Typography variant="body2" align="center">
                 {file}
               </Typography>
-            </Box>
+            </Button>
           ))}
         </Box>
       </Box>
