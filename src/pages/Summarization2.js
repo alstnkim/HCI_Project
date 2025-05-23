@@ -38,7 +38,7 @@ import MainSearchBar from "./MainSearchBar";
 
 const modalContent = [
   { name: "요약 & 핵심 문장", img: Modal3 },
-  { name: "코넬 노트 기본 구성", img: Modal1 },
+  { name: "전개전략형 요약 기본 구성", img: Modal1 },
   { name: "마인드 맵 기본 구성성", img: Modal2 },
 ];
 
@@ -64,8 +64,8 @@ const templates = [
     keyword: "/creating?keyword=coresummarization",
   },
   {
-    title: "코넬 노트",
-    desc: "코넬 노트로 깔끔하게 정리된 템플릿",
+    title: "전개전략형 요약",
+    desc: "전개전략형 요약 방식으로 깔끔하게 정리된 템플릿",
     img: cornellIcon,
     btn: "요약하러 가기 >",
     color: "#f1e4ff",

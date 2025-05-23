@@ -52,8 +52,8 @@ function Select() {
         <SelectComponent
           backgroundImg={select2back}
           iconImg={select2}
-          title="코넬 노트"
-          description="코넬 노트를 기반으로 제작된 템플릿"
+          title=" 전개전략형 요약 "
+          description=" 전개전략형 요약를 기반으로 제작된 템플릿"
         />{" "}
         <SelectComponent
           backgroundImg={select3back}
